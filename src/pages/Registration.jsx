@@ -60,35 +60,23 @@ const Registration = () => {
     }
 
     return (
-        <div className='text-center container mx-auto mt-16'>
+        <div className='text-center container mx-auto py-10'>
             <div>
-                <h1 className='text-3xl my-4 font-bold'>User Registration</h1>
+                <h1 className='md:text-4xl my-4 font-bold text-yellow-400'>User Registration</h1>
             </div>
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 border mx-auto">
+            <div className="card w-full max-w-sm shrink-0 mx-auto">
                 <form className="card-body" onSubmit={handleSubmit}>
                     <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Name</span>
-                        </label>
                         <input type="text" placeholder="name" name='name' className="input input-bordered" required />
                         <p className='text-red-600'>{error.nameErr && error.nameErr}</p>
                     </div>
                     <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                        </label>
                         <input type="email" placeholder="email" name='email' className="input input-bordered" required />
                     </div>
                     <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Photo URL</span>
-                        </label>
                         <input type="url" placeholder="photo" name='photo' className="input input-bordered" required />
                     </div>
                     <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Password</span>
-                        </label>
                         <input type="password" placeholder="password" name='password' className="input input-bordered" required />
                         <p className='text-red-600'>{error.passErr && error.passErr}</p>
                     </div>
@@ -100,7 +88,7 @@ const Registration = () => {
                         <button className="btn btn-neutral" onClick={handleGoogleLogin}>Goodle</button>
                     </div>
                 </form>
-                <p className='mb-5'>Already have an account? <Link to="/login">Login</Link></p>
+                <p className='mb-5 text-white'>Already have an account? <Link to="/login">Login</Link></p>
             </div>
         </div>
     );

@@ -30,25 +30,19 @@ const Login = () => {
     }
 
     return (
-        <div className='text-center container mx-auto md:mt-16'>
+        <div className='text-center container mx-auto py-10'>
             <div>
-                <h1 className='text-3xl my-4 font-bold'>User Login</h1>
+                <h1 className='md:text-4xl my-4 font-bold text-orange-400'>User Login</h1>
             </div>
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 border mx-auto">
+            <div className="card w-full max-w-sm shrink-0 mx-auto text-white">
                 <form className="card-body" onSubmit={handleSubmit}>
                     <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                        </label>
                         <input type="email" placeholder="email" name='email' className="input input-bordered" required />
                     </div>
                     <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Password</span>
-                        </label>
                         <input type="password" placeholder="password" name='password' className="input input-bordered" required />
                         <label className="label">
-                            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                            <a href="#" className="label-text-alt link link-hover text-white">Forgot password?</a>
                         </label>
                     </div>
                     <p className='text-rose-600'>{error && error}</p>
