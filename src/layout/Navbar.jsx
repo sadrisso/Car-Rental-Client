@@ -9,7 +9,7 @@ const Navbar = () => {
             <Link to="/add-car">Add Car</Link>
             <Link to="/my-cars">My Cars</Link>
             <Link to="/available-cars">AvailableCars</Link>
-            <button className='btn btn-info'><Link to="/login">Login</Link></button>
+            <button className='btn btn-sm btn-neutral'><Link to="/login">Login</Link></button>
         </div>
 
     return (

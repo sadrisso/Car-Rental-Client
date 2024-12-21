@@ -20,3 +20,8 @@
 -
 -
 
+## Repositories
+***client***
+https://github.com/programming-hero-web-course2/b10a11-client-side-sadrisso
+***server***
+
