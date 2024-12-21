@@ -60,7 +60,7 @@ const Registration = () => {
     }
 
     return (
-        <div className='text-center container mx-auto py-10'>
+        <div className='text-center container mx-auto py-10 bg-page-bg bg-cover bg-center bg-no-repeat'>
             <div>
                 <h1 className='md:text-4xl my-4 font-bold text-yellow-400'>User Registration</h1>
             </div>
