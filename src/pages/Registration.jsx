@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
@@ -10,6 +10,7 @@ const googleProvider = new GoogleAuthProvider()
 const Registration = () => {
 
     const { createUser, loading, updateUser } = useContext(AuthContext)
+    const [error, setError] = useState({})
     const navigate = useNavigate()
 
     const handleSubmit = e => {
@@ -18,18 +19,32 @@ const Registration = () => {
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
+        const photo = form.photo.value;
         const password = form.password.value;
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+        if (name.length <= 3) {
+            setError({...error, nameErr: "Name must be longer then 3 character!"})
+            return
+        }
+
+        if (!passwordRegex.test(password)) {
+            setError({...error, passErr: "Pass must be 1 uppercase 1 lowercase and 6 character long!"})
+            return
+        }
 
         createUser(email, password)
             .then(res => {
-                updateUser({displayName: name})
+                updateUser({displayName: name, photoURL: photo})
                 console.log("Register Successfull -->", res.user)
                 form.reset()
                 alert("Successfully Registered!!")
                 navigate("/")
             })
             .catch(err => {
-                console.log("ERR -->", err)
+                console.log(err.message)
+                setError({...error, authErr: err.message})
             })
     }
 
@@ -56,6 +71,7 @@ const Registration = () => {
                             <span className="label-text">Name</span>
                         </label>
                         <input type="text" placeholder="name" name='name' className="input input-bordered" required />
+                        <p className='text-red-600'>{error.nameErr && error.nameErr}</p>
                     </div>
                     <div className="form-control">
                         <label className="label">
@@ -65,10 +81,18 @@ const Registration = () => {
                     </div>
                     <div className="form-control">
                         <label className="label">
+                            <span className="label-text">Photo URL</span>
+                        </label>
+                        <input type="url" placeholder="photo" name='photo' className="input input-bordered" required />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" placeholder="password" name='password' className="input input-bordered" required />
+                        <p className='text-red-600'>{error.passErr && error.passErr}</p>
                     </div>
+                    <p className='text-red-600'>{error.authErr && error.authErr}</p>
                     <div className="form-control mt-6">
                         <button className="btn btn-primary">Register</button>
                     </div>

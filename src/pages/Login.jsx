@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
+
 
 const Login = () => {
 
     const { signInUser, loading } = useContext(AuthContext)
+    const [error, setError] = useState(null)
     const navigate = useNavigate()
 
     const handleSubmit = e => {
@@ -22,7 +24,8 @@ const Login = () => {
                 navigate("/")
             })
             .catch(err => {
-                console.log("ERR -->", err)
+                console.log(err.message)
+                setError(err.message)
             })
     }
 
@@ -48,6 +51,7 @@ const Login = () => {
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
                     </div>
+                    <p className='text-rose-600'>{error && error}</p>
                     <div className="form-control mt-6">
                         <button className="btn btn-primary">Login</button>
                     </div>
