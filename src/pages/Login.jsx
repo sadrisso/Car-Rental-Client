@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 
 const Login = () => {
 
     const { signInUser, loading } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -18,6 +19,7 @@ const Login = () => {
                 console.log("Login Successfull -->", res.user)
                 form.reset()
                 alert("Successfully Logged In!!")
+                navigate("/")
             })
             .catch(err => {
                 console.log("ERR -->", err)

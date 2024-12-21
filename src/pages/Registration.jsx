@@ -1,6 +1,6 @@
 
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../firebase/firebase.init';
@@ -9,7 +9,8 @@ const googleProvider = new GoogleAuthProvider()
 
 const Registration = () => {
 
-    const { createUser, loading } = useContext(AuthContext)
+    const { createUser, loading, updateUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -21,9 +22,11 @@ const Registration = () => {
 
         createUser(email, password)
             .then(res => {
+                updateUser({displayName: name})
                 console.log("Register Successfull -->", res.user)
                 form.reset()
                 alert("Successfully Registered!!")
+                navigate("/")
             })
             .catch(err => {
                 console.log("ERR -->", err)
@@ -34,6 +37,7 @@ const Registration = () => {
         signInWithPopup(auth, googleProvider)
             .then(res => {
                 console.log("Google Registered User -->", res.user)
+                navigate("/")
             })
             .catch(err => {
                 console.log("ERR: ", err)

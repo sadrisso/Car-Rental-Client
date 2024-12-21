@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 
 const Navbar = () => {
 
     const { user, signOutUser } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const handleSignOut = () => {
         signOutUser()
             .then(() => {
                 console.log("User sign out successfull")
+                navigate("/login")
             })
     }
 
