@@ -2,6 +2,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../firebase/firebase.init';
+
+const googleProvider = new GoogleAuthProvider()
 
 const Registration = () => {
 
@@ -26,8 +30,18 @@ const Registration = () => {
             })
     }
 
+    const handleGoogleLogin = () => {
+        signInWithPopup(auth, googleProvider)
+            .then(res => {
+                console.log("Google Registered User -->", res.user)
+            })
+            .catch(err => {
+                console.log("ERR: ", err)
+            })
+    }
+
     return (
-        <div className='text-center container mx-auto'>
+        <div className='text-center container mx-auto mt-16'>
             <div>
                 <h1 className='text-3xl my-4 font-bold'>User Registration</h1>
             </div>
@@ -55,7 +69,7 @@ const Registration = () => {
                         <button className="btn btn-primary">Register</button>
                     </div>
                     <div className="form-control">
-                        <button className="btn btn-neutral">Goodle</button>
+                        <button className="btn btn-neutral" onClick={handleGoogleLogin}>Goodle</button>
                     </div>
                 </form>
                 <p className='mb-5'>Already have an account? <Link to="/login">Login</Link></p>

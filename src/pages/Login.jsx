@@ -25,7 +25,7 @@ const Login = () => {
     }
 
     return (
-        <div className='text-center container mx-auto'>
+        <div className='text-center container mx-auto md:mt-16'>
             <div>
                 <h1 className='text-3xl my-4 font-bold'>User Login</h1>
             </div>
