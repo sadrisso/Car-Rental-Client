@@ -1,24 +1,42 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const MyCars = () => {
 
     const myCars = useLoaderData()
     const [myCar, setMycar] = useState(myCars);
-    console.log("my added cars", myCars)
+
 
     const handleRemove = id => {
-        alert("Are you sure to delete??")
-        fetch(`http://localhost:5000/my-cars/${id}`, {
-            method: "DELETE"
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((res) => {
+            if (res.isConfirmed) {
+                fetch(`http://localhost:5000/my-cars/${id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+                const remaining = myCar.filter((car) => car._id !== id)
+                setMycar(remaining);
+            }
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
-        const remaining = myCar.filter((car) => car._id !== id)
-        setMycar(remaining);
+
     }
 
     return (
@@ -47,7 +65,7 @@ const MyCars = () => {
                                 <td>${car.dailyRentalPrice}</td>
                                 <td>{car.date}</td>
                                 <td>
-                                    <button className='btn btn-xs mr-2'>Edit</button>
+                                    <Link to={`/update-car/${car?._id}`}><button className='btn btn-xs mr-2'>Edit</button></Link>
                                     <button className='btn btn-xs' onClick={() => handleRemove(car._id)}>Delete</button>
                                 </td>
                             </tr>)}
