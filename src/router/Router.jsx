@@ -7,6 +7,7 @@ import CarDetails from '../pages/CarDetails';
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
+import PrivateRoute from './PrivateRoute';
 
 
 export const router = createBrowserRouter([
@@ -21,15 +22,16 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/add-car",
-                element: <AddCar></AddCar>
+                element: <PrivateRoute><AddCar></AddCar></PrivateRoute>
             },
             {
-                path: "/my-cars",
-                element: <MyCars></MyCars>
+                path: "/my-cars/:email",
+                element: <PrivateRoute><MyCars></MyCars></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/my-cars/${params.email}`)
             },
             {
                 path: "/available-cars",
-                element: <AvailableCars></AvailableCars>
+                element: <PrivateRoute><AvailableCars></AvailableCars></PrivateRoute>
             },
             {
                 path: "/car-details",

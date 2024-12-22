@@ -1,9 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthProvider';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
 
 const AddCar = () => {
 
     const { user } = useContext(AuthContext)
+    const [date, setDate] = useState(new Date())
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -14,6 +18,11 @@ const AddCar = () => {
         initialData.userEmail = user?.email;
 
         console.log("form data -->", initialData)
+
+        axios.post("http://localhost:5000/add-car", initialData)
+            .then(res => {
+                console.log("Added data --> ", res.data)
+            })
     }
     return (
         <div className='text-center bg-page-bg bg-cover h-[900px] pt-36 md:h-[500px] space-y-5 md:py-20'>
@@ -53,6 +62,11 @@ const AddCar = () => {
                         <option value="AI">AI</option>
                     </select>
                     <textarea className="textarea textarea-secondary resize-none w-2/3 md:w-1/3" placeholder="description" name='description'></textarea>
+                    <DatePicker selected={date} onChange={(d) => setDate(d)} className='border p-2 rounded-md' name="date"></DatePicker>
+                    <input
+                        type="file"
+                        name='file'
+                        placeholder="file" />
                     <button className='btn w-2/3'>Submit</button>
                 </form>
             </div>

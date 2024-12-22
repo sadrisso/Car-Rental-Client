@@ -18,11 +18,14 @@ const Navbar = () => {
     const links =
         <div className='flex gap-5 items-center'>
             <Link to="/">Home</Link>
-            <Link to="/add-car">Add Car</Link>
-            <Link to="/my-cars">My Cars</Link>
+            <Link to="/add-car">AddCar</Link>
+            <Link to={`/my-cars/${user?.email}`}>MyCars</Link>
             <Link to="/available-cars">AvailableCars</Link>
             {
-                user ? <button className='btn btn-sm btn-neutral' onClick={handleSignOut}>SignOut</button>
+                user ? <div className='flex items-center gap-2'>
+                    <button className='btn btn-sm btn-neutral' onClick={handleSignOut}>SignOut</button>
+                    <img src={user?.photoURL} alt="" className='w-[30px] h-[30px] rounded-full' />
+                </div>
                     : <button className='btn btn-sm btn-neutral'><Link to="/login">Login</Link></button>
             }
         </div>
@@ -52,7 +55,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">Pro Cars</a>
+                    <a className="btn btn-ghost text-xl text-white">Pro Cars</a>
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
