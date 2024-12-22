@@ -37,10 +37,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/available-cars",
-                element: <PrivateRoute><AvailableCars></AvailableCars></PrivateRoute>
+                element: <PrivateRoute><AvailableCars></AvailableCars></PrivateRoute>,
+                loader: () => fetch("http://localhost:5000/all-cars")
             },
             {
-                path: "/car-details",
+                path: "/car-details/:id",
                 element: <CarDetails></CarDetails>
             },
             {

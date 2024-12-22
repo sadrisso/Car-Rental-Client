@@ -34,7 +34,7 @@ const MyCars = () => {
                 title: "Deleted!",
                 text: "Your file has been deleted.",
                 icon: "success"
-              });
+            });
         })
 
     }
@@ -42,7 +42,13 @@ const MyCars = () => {
     return (
         <div className='md:mt-20'>
             <div className="overflow-x-auto">
-                <h1 className='text-center font-bold text-3xl mb-5'>My Cars</h1>
+                <div className='flex flex-col md:flex-row gap-4 justify-between md:w-2/3 items-center mx-auto'>
+                    <h1 className='text-center font-bold text-3xl mb-5 text-amber-500'>My Cars</h1>
+                    <select name="sort">
+                        <option value="date">Sort By Date</option>
+                        <option value="price">Sort By Price</option>
+                    </select>
+                </div>
                 <table className="table text-center md:w-2/3 mx-auto">
                     {/* head */}
                     <thead>
