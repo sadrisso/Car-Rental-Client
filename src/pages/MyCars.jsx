@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 
 const MyCars = () => {
 
     const myCars = useLoaderData()
+    const [myCar, setMycar] = useState(myCars);
     console.log("my added cars", myCars)
+
+    const handleRemove = id => {
+        alert("Are you sure to delete??")
+        fetch(`http://localhost:5000/my-cars/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+        const remaining = myCar.filter((car) => car._id !== id)
+        setMycar(remaining);
+    }
 
     return (
         <div className='md:mt-20'>
@@ -25,7 +39,7 @@ const MyCars = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {myCars.map((car, i) =>
+                        {myCar.map((car, i) =>
                             <tr key={i}>
                                 <th>{i + 1}</th>
                                 <td>{car.carModel}</td>
@@ -34,7 +48,7 @@ const MyCars = () => {
                                 <td>{car.date}</td>
                                 <td>
                                     <button className='btn btn-xs mr-2'>Edit</button>
-                                    <button className='btn btn-xs'>Delete</button>
+                                    <button className='btn btn-xs' onClick={() => handleRemove(car._id)}>Delete</button>
                                 </td>
                             </tr>)}
                     </tbody>
