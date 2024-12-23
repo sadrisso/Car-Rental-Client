@@ -4,7 +4,7 @@ const WhyChooseUs = () => {
     return (
         <div className='md:p-20 p-5 text-center'>
             <div>
-                <h1 className='md:text-4xl text-3xl font-semibold my-10'>Why Us?</h1>
+                <h1 className='md:text-4xl text-2xl font-semibold my-10 text-amber-500'>Why Us?</h1>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 md:gap-5 rounded-xl p-5'>
                 <div>

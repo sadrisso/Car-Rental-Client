@@ -17,7 +17,7 @@
 
 ## npm packages: 
 - DatePicker
-- 
+- Lottie React
 -
 
 ## Repositories

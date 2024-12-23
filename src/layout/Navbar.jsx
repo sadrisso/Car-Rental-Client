@@ -20,6 +20,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
             {user && <Link to="/add-car">AddCar</Link>}
             {user && <Link to={`/my-cars/${user?.email}`}>MyCars</Link>}
+            {user && <Link to={`/my-bookings/${user?.email}`}>MyBookings</Link>}
             <Link to="/available-cars">AvailableCars</Link>
             {
                 user ? <div className='flex items-center gap-2'>

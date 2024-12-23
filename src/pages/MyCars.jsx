@@ -85,7 +85,3 @@ const MyCars = () => {
 };
 
 export default MyCars;
-
-<tr>
-
-</tr>
