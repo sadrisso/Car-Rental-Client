@@ -9,13 +9,14 @@ import Login from "../pages/Login";
 import Registration from "../pages/Registration";
 import PrivateRoute from './PrivateRoute';
 import UpdateCar from "../pages/UpdateCar";
+import ErrorPage from "../pages/ErrorPage";
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
-        errorElement: <h2>Page Not Found</h2>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
@@ -28,22 +29,22 @@ export const router = createBrowserRouter([
             {
                 path: "/my-cars/:email",
                 element: <PrivateRoute><MyCars></MyCars></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/my-cars/${params.email}`)
+                loader: ({params}) => fetch(`https://car-rental-server-smoky.vercel.app/my-cars/${params.email}`)
             },
             {
                 path: "/update-car/:id",
                 element: <UpdateCar></UpdateCar>,
-                loader: ({params}) => fetch(`http://localhost:5000/update-car/${params.id}`)
+                loader: ({params}) => fetch(`https://car-rental-server-smoky.vercel.app/update-car/${params.id}`)
             },
             {
                 path: "/available-cars",
                 element: <PrivateRoute><AvailableCars></AvailableCars></PrivateRoute>,
-                loader: () => fetch("http://localhost:5000/all-cars")
+                loader: () => fetch("https://car-rental-server-smoky.vercel.app/all-cars")
             },
             {
                 path: "/car-details/:id",
-                element: <CarDetails></CarDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/car-details/${params.id}`)
+                element: <PrivateRoute><CarDetails></CarDetails></PrivateRoute>,
+                loader: ({params}) => fetch(`https://car-rental-server-smoky.vercel.app/car-details/${params.id}`)
             },
             {
                 path: "/login",

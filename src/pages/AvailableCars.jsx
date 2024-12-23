@@ -48,7 +48,7 @@ const AvailableCars = () => {
                             <hr />
                             <p>Added date: {car.date}</p>
                             <div className="card-actions justify-end">
-                                <Link to={`/car-details/${car._id}`}><button className="btn btn-primary">Book Now</button></Link>
+                                <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
                             </div>
                         </div>
                     </div>)}

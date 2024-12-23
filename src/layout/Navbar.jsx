@@ -18,8 +18,8 @@ const Navbar = () => {
     const links =
         <div className='flex gap-5 items-center'>
             <Link to="/">Home</Link>
-            <Link to="/add-car">AddCar</Link>
-            <Link to={`/my-cars/${user?.email}`}>MyCars</Link>
+            {user && <Link to="/add-car">AddCar</Link>}
+            {user && <Link to={`/my-cars/${user?.email}`}>MyCars</Link>}
             <Link to="/available-cars">AvailableCars</Link>
             {
                 user ? <div className='flex items-center gap-2'>
@@ -55,7 +55,10 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl text-white">Pro Cars</a>
+                    <div className='flex items-center'>
+                        <img className='w-[50px] h-[50px] rounded-full' src="https://i.ibb.co.com/qCSg7zH/carLogo.webp" alt="" />
+                        <a className="btn btn-ghost text-xl text-white">Pro Cars</a>
+                    </div>
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

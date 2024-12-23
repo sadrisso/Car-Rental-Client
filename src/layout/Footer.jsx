@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthProvider';
 
 const Footer = () => {
+
+    const { user } = useContext(AuthContext)
+
     return (
         <div>
             <footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
                 <nav className="grid grid-flow-col gap-4">
                     <Link to="/">Home</Link>
-                    <Link to="/add-car">Add Car</Link>
-                    <Link to="/my-cars">My Cars</Link>
+                    {user && <Link to="/add-car">Add Car</Link>}
+                    {user && <Link to="/my-cars">My Cars</Link>}
                     <Link to="/available-cars">AvailableCars</Link>
                 </nav>
                 <nav>
@@ -48,8 +52,12 @@ const Footer = () => {
                         </a>
                     </div>
                 </nav>
-                <aside>
+                <aside className=''>
                     <p>Copyright © {new Date().getFullYear()} - All right reserved by BD Car Industries Ltd</p>
+                    <a>
+                        <img className='w-[100px] h-[70px] rounded-2xl' src="https://i.ibb.co.com/qCSg7zH/carLogo.webp" alt="" />
+                        <p>Pro Cars Ltd.</p>
+                    </a>
                 </aside>
             </footer>
         </div>

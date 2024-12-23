@@ -20,7 +20,7 @@ const UpdateCar = () => {
 
         console.log("form data -->", initialData)
 
-        axios.put(`http://localhost:5000/update-car/${data?._id}`, initialData)
+        axios.put(`https://car-rental-server-smoky.vercel.app/update-car/${data?._id}`, initialData)
             .then(res => {
                 console.log("Added data --> ", res.data)
                 toast.success("Successfully Updated!")

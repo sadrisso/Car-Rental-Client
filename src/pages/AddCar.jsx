@@ -22,7 +22,7 @@ const AddCar = () => {
 
         console.log("form data -->", initialData)
 
-        axios.post("http://localhost:5000/add-car", initialData)
+        axios.post("https://car-rental-server-smoky.vercel.app/add-car", initialData)
             .then(res => {
                 console.log("Added data --> ", res.data)
                 toast.success("Successfully Added!")

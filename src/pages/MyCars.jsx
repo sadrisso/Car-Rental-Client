@@ -20,7 +20,7 @@ const MyCars = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((res) => {
             if (res.isConfirmed) {
-                fetch(`http://localhost:5000/my-cars/${id}`, {
+                fetch(`https://car-rental-server-smoky.vercel.app/my-cars/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

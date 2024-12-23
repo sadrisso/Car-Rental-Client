@@ -10,7 +10,7 @@ const Login = () => {
     const [error, setError] = useState(null)
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location.state || "/"
+    const from = location.state || "/";
 
     const handleSubmit = e => {
         e.preventDefault()
