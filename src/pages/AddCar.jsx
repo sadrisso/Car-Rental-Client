@@ -30,10 +30,10 @@ const AddCar = () => {
             })
     }
     return (
-        <div className='text-center bg-page-bg bg-cover h-[900px] pt-36 md:h-[500px] space-y-5 md:py-20'>
+        <div className='text-center bg-page-bg bg-cover bg-center h-[900px] pt-36 md:h-[500px] space-y-5 md:py-20'>
             <div>
                 <h1 className='text-3xl text-amber-500 font-semibold'>Add Car</h1>
-            </div> console.log("my added cars", myCars)
+            </div>
             <div className='mx-auto w-full md:w-2/3'>
                 <form onSubmit={handleSubmit} className='flex flex-col md:flex-row flex-wrap justify-center gap-5 items-center'>
                     <input
@@ -69,9 +69,10 @@ const AddCar = () => {
                     <textarea className="textarea textarea-secondary resize-none w-2/3 md:w-1/3" placeholder="description" name='description'></textarea>
                     <DatePicker selected={date} onChange={(d) => setDate(d)} className='border p-2 rounded-md' name="date"></DatePicker>
                     <input
-                        type="file"
-                        name='file'
-                        placeholder="file" />
+                        type="url"
+                        name='photo'
+                        placeholder="photo"
+                        className="input input-bordered input-secondary w-full max-w-xs" />
                     <button className='btn w-2/3'>Submit</button>
                 </form>
             </div>

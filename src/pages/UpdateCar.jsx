@@ -74,9 +74,10 @@ const UpdateCar = () => {
                     <textarea defaultValue={description} className="textarea textarea-secondary resize-none w-2/3 md:w-1/3" placeholder="description" name='description'></textarea>
 
                     <input
-                        type="file"
-                        name='file'
-                        placeholder="file" />
+                        type="url"
+                        name='photo'
+                        placeholder="photo"
+                        className="input input-bordered input-secondary w-full max-w-xs" />
                     <button className='btn w-2/3'>Submit</button>
                 </form>
             </div>

@@ -12,7 +12,7 @@ export default {
     extend: {
       backgroundImage: {
         'hero-bg': "url('https://i.ibb.co.com/yffdYfV/car-4.jpg')",
-        'page-bg': "url('https://i.ibb.co.com/KqMS0CH/car-6.jpg')"
+        'page-bg': "url('https://i.ibb.co.com/YQ6B8FK/car-7.jpg')"
       }
     },
   },

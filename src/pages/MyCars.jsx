@@ -54,6 +54,7 @@ const MyCars = () => {
                     <thead>
                         <tr>
                             <th>Serial</th>
+                            <th>Photo</th>
                             <th>Model</th>
                             <th>Availability</th>
                             <th>Rental Price</th>
@@ -66,6 +67,7 @@ const MyCars = () => {
                         {myCar.map((car, i) =>
                             <tr key={i}>
                                 <th>{i + 1}</th>
+                                <td><img src={car?.photo} className='w-[70px] h-[50px] mx-auto' alt="" /></td>
                                 <td>{car.carModel}</td>
                                 <td>{car.availability}</td>
                                 <td>${car.dailyRentalPrice}</td>

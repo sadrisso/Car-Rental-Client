@@ -64,7 +64,7 @@ const Registration = () => {
             <div>
                 <h1 className='md:text-4xl my-4 font-bold text-yellow-400'>User Registration</h1>
             </div>
-            <div className="card w-full max-w-sm shrink-0 mx-auto">
+            <div className="card w-full bg-base-300 max-w-sm shrink-0 mx-auto">
                 <form className="card-body" onSubmit={handleSubmit}>
                     <div className="form-control">
                         <input type="text" placeholder="name" name='name' className="input input-bordered" required />
@@ -88,7 +88,7 @@ const Registration = () => {
                         <button className="btn btn-neutral" onClick={handleGoogleLogin}>Goodle</button>
                     </div>
                 </form>
-                <p className='mb-5 text-white'>Already have an account? <Link to="/login">Login</Link></p>
+                <p className='mb-5'>Already have an account? <Link to="/login">Login</Link></p>
             </div>
         </div>
     );

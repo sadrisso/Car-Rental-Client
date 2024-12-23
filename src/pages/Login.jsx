@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
             .then(res => {
                 console.log("Login Successfull -->", res.user)
                 form.reset()
-                alert("Successfully Logged In!!")
+                toast.success("Successfully Logged In")
                 navigate(from)
             })
             .catch(err => {
@@ -36,7 +37,7 @@ const Login = () => {
             <div>
                 <h1 className='md:text-4xl my-4 font-bold text-orange-400'>User Login</h1>
             </div>
-            <div className="card w-full max-w-sm shrink-0 mx-auto text-white">
+            <div className="card w-full bg-base-300 max-w-sm shrink-0 mx-auto">
                 <form className="card-body" onSubmit={handleSubmit}>
                     <div className="form-control">
                         <input type="email" placeholder="email" name='email' className="input input-bordered" required />
@@ -44,7 +45,7 @@ const Login = () => {
                     <div className="form-control">
                         <input type="password" placeholder="password" name='password' className="input input-bordered" required />
                         <label className="label">
-                            <a href="#" className="label-text-alt link link-hover text-white">Forgot password?</a>
+                            <a href="#" className="label-text-alt link link-hover ">Forgot password?</a>
                         </label>
                     </div>
                     <p className='text-rose-600'>{error && error}</p>

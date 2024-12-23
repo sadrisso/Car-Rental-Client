@@ -38,7 +38,8 @@ const AvailableCars = () => {
                     <div key={i} className="card card-compact border text-center">
                         <figure>
                             <img
-                                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                                src={car?.photo}
+                                className='w-[380px] h-[200px] rounded-2xl p-2'
                                 alt="Shoes" />
                         </figure>
                         <div className="card-body">
