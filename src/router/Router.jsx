@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
             {
                 path: "/my-bookings/:email",
                 element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
-                loader: ({params}) => fetch(`https://car-rental-server-smoky.vercel.app/my-bookings/${params.email}`)
+                loader: ({params}) => fetch(`http://localhost:5000/my-bookings/${params.email}`)
             },
             {
                 path: "/update-car/:id",

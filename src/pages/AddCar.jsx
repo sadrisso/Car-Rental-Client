@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthProvider';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const AddCar = () => {
 
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
-    const [date, setDate] = useState(new Date())
+    // const [date, setDate] = useState(new Date())
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -19,6 +20,7 @@ const AddCar = () => {
         const initialData = Object.fromEntries(formData.entries())
         initialData.bookingCount = 0;
         initialData.userEmail = user?.email;
+        initialData.date = moment().format();
 
         console.log("form data -->", initialData)
 
@@ -67,7 +69,6 @@ const AddCar = () => {
                         <option value="AI">AI</option>
                     </select>
                     <textarea className="textarea textarea-secondary resize-none w-2/3 md:w-1/3" placeholder="description" name='description'></textarea>
-                    <DatePicker selected={date} onChange={(d) => setDate(d)} className='border p-2 rounded-md' name="date"></DatePicker>
                     <input
                         type="url"
                         name='photo'

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -34,8 +35,8 @@ const RecentListed = () => {
                                     <p>Status: {data.availability}</p>
                                 </div>
                                 <hr />
-                                <p>Added date: {data.date}</p>
-                                <p className='text-gray-600'>Posted today</p>
+                                <p>Added date: {moment(data?.date).format('ll')}</p>
+                                <p className='text-gray-600'>Posted {moment(data?.date).calendar()}</p>
                                 <div className="card-actions justify-end">
                                     <Link to={`/car-details/${data._id}`}><button className="btn btn-sm">See Details</button></Link>
                                 </div>

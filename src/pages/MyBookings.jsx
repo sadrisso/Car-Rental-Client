@@ -4,7 +4,6 @@ import { Link, useLoaderData } from 'react-router-dom';
 const MyBookings = () => {
 
     const data = useLoaderData()
-    const [myBooking, setMyBooking] = useState(data)
 
     return (
         <div>
@@ -31,7 +30,7 @@ const MyBookings = () => {
                         </thead>
                         <tbody>
                             {/* row 1 */}
-                            {myBooking.map((car, i) =>
+                            {data?.map((car, i) =>
                                 <tr key={i}>
                                     <td><img src={car?.photo} className='w-[70px] h-[50px] mx-auto' alt="" /></td>
                                     <td>{car.carModel}</td>
@@ -39,8 +38,8 @@ const MyBookings = () => {
                                     <td>{car.date}</td>
                                     <td>Pending</td>
                                     <td>
-                                        <Link to={`/update-car/${car?._id}`}><button className='btn btn-xs mr-2'>Cancel Booking</button></Link>
-                                        <button className='btn btn-xs' onClick={() => handleRemove(car._id)}>Modify Date</button>
+                                        <Link><button className='btn btn-xs mr-2'>Cancel Booking</button></Link>
+                                        <button className='btn btn-xs'>Modify Date</button>
                                     </td>
                                 </tr>)}
                         </tbody>

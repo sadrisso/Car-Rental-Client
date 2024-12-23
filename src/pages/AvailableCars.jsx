@@ -1,9 +1,34 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 
 const AvailableCars = () => {
 
-    const cars = useLoaderData()
+    const [cars, setCars] = useState(useLoaderData())
+    const [searchName, setSearchName] = useState("")
+    const [sort, setSort] = useState("")
+
+    useEffect(() => {
+
+        let queryStr = ""
+        if (searchName) {
+            queryStr += `searchName=${searchName}`
+        }
+
+        if (sort) {
+            queryStr += `${sort}=desc`
+        }
+
+        console.log(sort)
+
+        axios.get(`http://localhost:5000/all-cars?${queryStr}`)
+            .then(res => {
+                if (res?.data) {
+                    setCars(res?.data)
+                }
+            })
+
+    }, [searchName, sort])
 
     return (
         <div className='text-center mx-auto container space-y-10 mt-16'>
@@ -12,12 +37,12 @@ const AvailableCars = () => {
                     <h1 className='text-amber-500 text-4xl font-semibold'>Available Cars</h1>
                 </div>
                 <div className='flex flex-col md:flex-row gap-4 rounded-xl '>
-                    <select name="sort">
+                    <select name="sort" onChange={(e) => setSort(e.target.value)}>
                         <option value="date">Sort By Date</option>
                         <option value="price">Sort By Price</option>
                     </select>
                     <label className="input input-bordered flex items-center gap-2">
-                        <input type="text" className="grow" placeholder="Search By Name" />
+                        <input onChange={(e) => setSearchName(e.target.value)} type="text" className="grow" placeholder="Search By Name" />
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"

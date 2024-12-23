@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -71,7 +72,7 @@ const MyCars = () => {
                                 <td>{car.carModel}</td>
                                 <td>{car.availability}</td>
                                 <td>${car.dailyRentalPrice}</td>
-                                <td>{car.date}</td>
+                                <td>{moment(car.date).format('ll')}</td>
                                 <td>
                                     <Link to={`/update-car/${car?._id}`}><button className='btn btn-xs mr-2'>Edit</button></Link>
                                     <button className='btn btn-xs' onClick={() => handleRemove(car._id)}>Delete</button>
