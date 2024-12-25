@@ -1,32 +1,58 @@
 // import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { useContext } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../auth/AuthProvider';
 
-const UpdateCar = () => {
+const UpdateCar = ({ selectedCar, closeModal, getCars }) => {
 
+    console.log("selected car", selectedCar)
+
+    const formRef = useRef(null);
     const navigate = useNavigate()
-    const {user} = useContext(AuthContext)
-    const data = useLoaderData()
+    const [data, setData] = useState([])
+    const { user } = useContext(AuthContext)
     const { carModel, dailyRentalPrice, availability, registrationNumber, location, features, description } = data;
 
-    const handleSubmit = e => {
-        e.preventDefault()
+    useEffect(() => {
+        axios.get(`https://car-rental-server-smoky.vercel.app/update-car/${selectedCar?._id}`)
+            .then(res => setData(res.data))
+    }, [selectedCar])
 
-        const formData = new FormData(e.target)
-        const initialData = Object.fromEntries(formData.entries())
+    console.log("data", data)
 
-        console.log("form data -->", initialData)
+    const handleSubmit = (e) => {
+        try {
+            e.preventDefault();
+            console.log("Form submitted");
 
-        axios.put(`https://car-rental-server-smoky.vercel.app/update-car/${data?._id}`, initialData)
-            .then(res => {
-                console.log("Added data --> ", res.data)
-                toast.success("Successfully Updated!")
-                navigate(`/my-cars/${user?.email}`)
-            })
-    }
+            const formData = {
+                carModel: formRef.current.elements.carModel.value,
+                dailyRentalPrice: formRef.current.elements.dailyRentalPrice.value,
+                availability: formRef.current.elements.availability.value,
+                registrationNumber: formRef.current.elements.registrationNumber.value,
+                location: formRef.current.elements.location.value,
+                features: formRef.current.elements.features.value,
+                description: formRef.current.elements.description.value,
+                photo: formRef.current.elements.photo.value,
+            };
+
+            axios.put(`https://car-rental-server-smoky.vercel.app/update-car/${selectedCar?._id}`, formData)
+                .then((res) => {
+                    console.log("Added data --> ", res.data);
+                    toast.success("Successfully Updated!");
+                    closeModal();
+                    getCars();
+                })
+                .catch((error) => {
+                    console.error("Error updating car:", error);
+                });
+        } catch (error) {
+            console.error("Error in handleSubmit:", error);
+        }
+    };
+
 
 
     return (
@@ -35,7 +61,7 @@ const UpdateCar = () => {
                 <h1 className='text-3xl text-amber-500 font-semibold'>Update Car</h1>
             </div>
             <div className='mx-auto w-full md:w-2/3'>
-                <form onSubmit={handleSubmit} className='flex flex-col md:flex-row flex-wrap justify-center gap-5 items-center'>
+                <form ref={formRef} className='flex flex-col md:flex-row flex-wrap justify-center gap-5 items-center'>
                     <input
                         type="text"
                         name='carModel'
@@ -79,7 +105,7 @@ const UpdateCar = () => {
                         name='photo'
                         placeholder="photo"
                         className="input input-bordered input-secondary w-full max-w-xs" />
-                    <button className='btn w-2/3'>Submit</button>
+                    <button className='btn w-2/3' onClick={handleSubmit}>Submit</button>
                 </form>
             </div>
         </div>

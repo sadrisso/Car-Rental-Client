@@ -4,14 +4,21 @@ import { Link, useLoaderData, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../auth/AuthProvider';
 import axios from 'axios';
+import UpdateCar from './UpdateCar';
 
 
 const MyCars = () => {
 
     const { loading } = useContext(AuthContext);
     const [myCar, setMycar] = useState([]);
+    const [selectedCar, setSelectedCar] = useState(null);
     const [sort, setSort] = useState("");
     const { email } = useParams()
+
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const closeModal = () => setIsModalOpen(false);
+
 
 
     useEffect(() => {
@@ -21,10 +28,14 @@ const MyCars = () => {
             queryStr += `${sort}=desc`
         }
 
-        axios.get(`https://car-rental-server-smoky.vercel.app/my-cars/${email}/?${queryStr}`)
-            .then(res => setMycar(res.data))
+        getCars(queryStr)
 
     }, [sort])
+
+    const getCars = (queryStr="") => {
+        axios.get(`http://localhost:5000/my-cars/${email}?${queryStr}`)
+            .then(res => setMycar(res.data))
+    }
 
 
     const handleRemove = id => {
@@ -37,6 +48,9 @@ const MyCars = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((res) => {
+            if (res.dismiss) {
+                return;
+            }
             if (res.isConfirmed) {
                 fetch(`https://car-rental-server-smoky.vercel.app/my-cars/${id}`, {
                     method: "DELETE"
@@ -56,8 +70,9 @@ const MyCars = () => {
         })
     }
 
-    const handleModalOpen = () => {
-        document.getElementById('my_modal_1').showModal()
+    const handleModalOpen = (car) => {
+        setSelectedCar(car)
+        setIsModalOpen(true);
     }
 
     return (
@@ -97,7 +112,7 @@ const MyCars = () => {
                                             <td>${car.dailyRentalPrice}</td>
                                             <td>{moment(car.date).format('ll')}</td>
                                             <td>
-                                                <Link><button onClick={handleModalOpen} className='btn btn-xs mr-2'>Edit</button></Link>
+                                                <Link><button onClick={() => handleModalOpen(car)} className='btn btn-xs mr-2'>Edit</button></Link>
                                                 <button className='btn btn-xs' onClick={() => handleRemove(car._id)}>Delete</button>
                                             </td>
                                         </tr>)}
@@ -108,21 +123,19 @@ const MyCars = () => {
                 )
             }
 
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <dialog id="my_modal_1" className="modal">
-                <div className="modal-box">
+            <dialog id="my_modal_1" open={isModalOpen} className="modal">
+                <div className="modal-box w-11/12 max-w-5xl">
                     <h3 className="font-bold text-lg">You want to update this data?</h3>
                     <p className="py-4">Press ESC key or click the button below to close</p>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Close</button>
+                            <UpdateCar selectedCar={selectedCar} closeModal={closeModal} getCars={getCars} />
+                            <button className="btn" onClick={closeModal}>Close</button>
                         </form>
                     </div>
                 </div>
             </dialog>
-
-
 
         </>
     );

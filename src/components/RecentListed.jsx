@@ -18,7 +18,7 @@ const RecentListed = () => {
                 <h1 className='text-2xl md:text-4xl font-semibold text-gray-800'>Recent Listings</h1>
                 <p className='text-gray-500 mt-2'>Recently added cars, you can checkout all of this</p>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-5 gap-4 mt-10'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-5 gap-4 mt-10'>
                 {
                     recentAddedData.map((data, i) =>
                         <div key={i} className="card card-compact hover:shadow-2xl">
@@ -29,7 +29,7 @@ const RecentListed = () => {
                                     alt="Shoes" />
                             </figure>
                             <div className="card-body">
-                                <h2 className="text-2xl" >{data.carModel}</h2>
+                                <h2 className="text-2xl font-bold" >{data.carModel}</h2>
                                 <div className='flex justify-between'>
                                     <p>Price: ${data.dailyRentalPrice}/Day</p>
                                     <p>Status: {data.availability}</p>

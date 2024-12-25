@@ -16,9 +16,9 @@
 - Responsive and Intuitive Design
 
 ## npm packages: 
-- DatePicker
+- MomentJs
 - Lottie React
--
+- 
 
 ## Repositories
 ***client***

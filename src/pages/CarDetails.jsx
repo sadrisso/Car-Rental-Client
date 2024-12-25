@@ -8,6 +8,7 @@ const CarDetails = () => {
 
     const { user } = useContext(AuthContext)
     const [isCarBooked, setIsCarBooked] = useState(false)
+    const [bookingCarData, setBookingCarData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const carDetails = useLoaderData()
     const { carModel, availability, date, dailyRentalPrice, location, photo } = carDetails;
@@ -19,7 +20,8 @@ const CarDetails = () => {
                 console.log(res?.data)
                 setIsLoading(false)
                 if (res?.data) {
-                    setIsCarBooked(true)
+                    setBookingCarData(res?.data)
+                    setIsCarBooked(res?.data?.status === "Canceled" ? false : true)
                 }
             })
     }
@@ -34,16 +36,30 @@ const CarDetails = () => {
     }
 
     const handleBooking = () => {
-        const payLoad = {
-            carModel: carModel.trim(), availability, date, dailyRentalPrice, location, photo,
-            userEmail: user?.email
+        if (bookingCarData) {
+            axios.put(`http://localhost:5000/update-booking/${bookingCarData?._id}`, {status: "Booked"})
+                .then((res) => {
+                    toast.success("Booking Confirmed")
+                    setIsLoading(true)
+                    checkBookStatus()
+                })
+                .catch((error) => {
+                    console.error("Error updating car:", error);
+                });
         }
-        axios.post("http://localhost:5000/my-bookings", payLoad)
-            .then(res => {
-                toast.success("Booking Confirmed")
-                setIsLoading(true)
-                checkBookStatus()
-            })
+        else {
+            const payLoad = {
+                carModel: carModel.trim(), availability, date, dailyRentalPrice, location, photo,
+                userEmail: user?.email,
+                status: "Booked"
+            }
+            axios.post("http://localhost:5000/my-bookings", payLoad)
+                .then(res => {
+                    toast.success("Booking Confirmed")
+                    setIsLoading(true)
+                    checkBookStatus()
+                })
+        }
     }
 
 
@@ -66,7 +82,7 @@ const CarDetails = () => {
                                 <p>Location: {location}</p>
                             </div>
                             {isCarBooked ? <button className='btn btn-disabled'>Booked</button> :
-                            <button className='btn btn-accent' onClick={handleBookingModalOpen}>Book Now</button>}
+                                <button className='btn btn-accent' onClick={handleBookingModalOpen}>Book Now</button>}
                         </div>
                     </div>)
             }
