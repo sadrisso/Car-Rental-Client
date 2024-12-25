@@ -71,6 +71,7 @@ const UpdateCar = () => {
                         <option value="AC">AC</option>
                         <option value="AI">AI</option>
                     </select>
+
                     <textarea defaultValue={description} className="textarea textarea-secondary resize-none w-2/3 md:w-1/3" placeholder="description" name='description'></textarea>
 
                     <input

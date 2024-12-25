@@ -21,7 +21,7 @@ const RecentListed = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-5 gap-4 mt-10'>
                 {
                     recentAddedData.map((data, i) =>
-                        <div key={i} className="card card-compact hover:bg-base-300 shadow-xl">
+                        <div key={i} className="card card-compact hover:shadow-2xl">
                             <figure>
                                 <img
                                     src={data?.photo}

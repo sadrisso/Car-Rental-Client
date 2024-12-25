@@ -10,7 +10,6 @@ import Registration from "../pages/Registration";
 import PrivateRoute from './PrivateRoute';
 import UpdateCar from "../pages/UpdateCar";
 import ErrorPage from "../pages/ErrorPage";
-import RecentListed from "../components/RecentListed";
 import MyBookings from "../pages/MyBookings";
 
 
@@ -31,12 +30,12 @@ export const router = createBrowserRouter([
             {
                 path: "/my-cars/:email",
                 element: <PrivateRoute><MyCars></MyCars></PrivateRoute>,
-                loader: ({params}) => fetch(`https://car-rental-server-smoky.vercel.app/my-cars/${params.email}`)
+                // loader: ({params}) => fetch(`https://car-rental-server-smoky.vercel.app/my-cars/${params.email}`)
             },
             {
                 path: "/my-bookings/:email",
                 element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/my-bookings/${params.email}`)
+                loader: ({params}) => fetch(`https://car-rental-server-smoky.vercel.app/my-bookings/${params.email}`)
             },
             {
                 path: "/update-car/:id",

@@ -72,14 +72,16 @@ const CarDetails = () => {
             }
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="my_modal_1" className="modal">
-                <div className="modal-box">
+                <div className="modal-box text-center">
                     <h3 className="font-bold text-lg">{carModel}</h3>
-                    <p className="py-4">Press ESC key or click the button below to close</p>
-                    <div className="modal-action">
-                        <form method="dialog">
+                    <p className="py-4">Price ${dailyRentalPrice}/Day</p>
+                    <p>Location: {location}</p>
+                    <p>Added Date: {date}</p>
+                    <div className="modal-action justify-center ">
+                        <form method="dialog" className='text-center'>
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Close</button>
-                            <button className='btn' onClick={handleBooking}>Confirm Book</button>
+                            <button className="btn btn-error mr-2">Close</button>
+                            <button className='btn btn-success' onClick={handleBooking}>Confirm Book</button>
                         </form>
                     </div>
                 </div>

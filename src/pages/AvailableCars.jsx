@@ -69,7 +69,7 @@ const AvailableCars = () => {
                         </figure>
                         <div className="card-body">
                             <h2 className="text-2xl" >{car.carModel}</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
+                            <p>Price ${car?.dailyRentalPrice}/Day</p>
                             <hr />
                             <p>Added date: {car.date}</p>
                             <div className="card-actions justify-end">
