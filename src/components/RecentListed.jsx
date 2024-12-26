@@ -8,7 +8,7 @@ const RecentListed = () => {
     const [recentAddedData, setRecentAddedData] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/recent-listed")
+        axios.get("https://car-rental-server-smoky.vercel.app/recent-listed")
             .then(res => setRecentAddedData(res.data))
     }, [])
 

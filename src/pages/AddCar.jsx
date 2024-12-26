@@ -1,11 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthProvider';
-// import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+
 
 const AddCar = () => {
 
@@ -20,7 +19,8 @@ const AddCar = () => {
         const initialData = Object.fromEntries(formData.entries())
         initialData.bookingCount = 0;
         initialData.userEmail = user?.email;
-        initialData.date = moment().format();
+        initialData.date = moment().format()
+
 
         console.log("form data -->", initialData)
 
@@ -72,6 +72,7 @@ const AddCar = () => {
                                     <option value="AI">AI</option>
                                 </select>
                                 <textarea className="textarea textarea-secondary resize-none w-2/3 md:w-1/3" placeholder="description" name='description'></textarea>
+                                
                                 <input
                                     type="url"
                                     name='photo'

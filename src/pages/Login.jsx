@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Login = () => {
 
-    const { signInUser, loading } = useContext(AuthContext)
+    const { signInUser } = useContext(AuthContext)
     const [error, setError] = useState(null)
     const navigate = useNavigate()
     const location = useLocation()
@@ -28,7 +28,7 @@ const Login = () => {
 
                 const user = res?.user?.email
 
-                axios.post("http://localhost:5000/jwt", user, { withCredentials: true })
+                axios.post("https://car-rental-server-smoky.vercel.app/jwt", user, { withCredentials: true })
                     .then(res => console.log(res.data))
 
                 navigate(from)

@@ -6,6 +6,7 @@ const AvailableCars = () => {
 
     const [cars, setCars] = useState(useLoaderData())
     const [searchName, setSearchName] = useState("")
+    const [view, setView] = useState("grid")
     const [sort, setSort] = useState("")
 
     useEffect(() => {
@@ -21,7 +22,7 @@ const AvailableCars = () => {
 
         console.log(sort)
 
-        axios.get(`http://localhost:5000/all-cars?${queryStr}`)
+        axios.get(`https://car-rental-server-smoky.vercel.app/all-cars?${queryStr}`)
             .then(res => {
                 if (res?.data) {
                     setCars(res?.data)
@@ -54,30 +55,61 @@ const AvailableCars = () => {
                                 clipRule="evenodd" />
                         </svg>
                     </label>
+                    <div className='flex gap-3'>
+                        <button onClick={() => setView("list")} className={view === "list" ? "btn btn-active" : "btn"}><i class="fa-solid fa-list"></i></button>
+                        <button onClick={() => setView("grid")} className={view === "grid" ? "btn btn-active" : "btn"}><i class="fa-solid fa-table-cells-large"></i></button>
+                    </div>
                 </div>
             </div>
 
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                {cars.map((car, i) =>
-                    <div key={i} className="card card-compact border text-center">
-                        <figure>
-                            <img
-                                src={car?.photo}
-                                className='w-[380px] h-[200px] rounded-2xl p-2'
-                                alt="Shoes" />
-                        </figure>
-                        <div className="card-body">
-                            <h2 className="text-2xl" >{car.carModel}</h2>
-                            <p>Price ${car?.dailyRentalPrice}/Day</p>
-                            <hr />
-                            <p>Added date: {car.date}</p>
-                            <div className="card-actions justify-end">
-                                <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
-                            </div>
-                        </div>
-                    </div>)}
-            </div>
+            {
+                view === "grid" ? (
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
+                        {cars.map((car, i) =>
+                            <div key={i} className="card card-compact border text-center">
+                                <figure>
+                                    <img
+                                        src={car?.photo}
+                                        className='w-[380px] h-[200px] rounded-2xl p-2'
+                                        alt="Shoes" />
+                                </figure>
+                                <div className="card-body">
+                                    <h2 className="text-2xl" >{car.carModel}</h2>
+                                    <p>Price ${car?.dailyRentalPrice}/Day</p>
+                                    <hr />
+                                    <p>Added date: {car.date}</p>
+                                    <div className="card-actions justify-end">
+                                        <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
+                                    </div>
+                                </div>
+                            </div>)}
+                    </div>
+                ) : (
+                    <div className='grid grid-cols-1 gap-5'>
+                        {cars.map((car, i) =>
+                            <div key={i} className="card card-compact border text-center">
+                                <figure>
+                                    <img
+                                        src={car?.photo}
+                                        className='w-[380px] h-[200px] rounded-2xl p-2'
+                                        alt="Shoes" />
+                                </figure>
+                                <div className="card-body flex justify-between">
+                                    <div>
+                                        <h2 className="text-2xl" >{car.carModel}</h2>
+                                        <p>Price ${car?.dailyRentalPrice}/Day</p>
+                                        <p>Added date: {car.date}</p>
+                                    </div>
+                                    <div className="card-actions justify-end">
+                                        <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
+                                    </div>
+                                </div>
+                            </div>)}
+                    </div>
+                )
+            }
+
         </div>
     );
 };
