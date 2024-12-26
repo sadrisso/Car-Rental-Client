@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../auth/AuthProvider';
 import axios from 'axios';

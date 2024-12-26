@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { Link, useLoaderData, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const MyBookings = () => {
@@ -11,6 +11,7 @@ const MyBookings = () => {
     const [date, setDate] = useState(new Date())
     const {email} = useParams();
     const [bookings, setBookings] = useState([]);
+    const [sort, setSort] = useState("")
     const [openBookingModal, setOpenBookingModal] = useState(false)
     const [selectedBooking, setSelectedBooking] = useState(null)
 
@@ -25,20 +26,22 @@ const MyBookings = () => {
 
 
     useEffect(() => {
-        // let queryStr = ""
+        let queryStr = ""
 
-        // if (sort) {
-        //     queryStr += `${sort}=desc`
-        // }
+        if (sort) {
+            queryStr += `${sort}=desc`
+        }
 
-        getBookings()
+        getBookings(queryStr)
 
-    }, [])
+    }, [sort])
 
-    const getBookings = () => {
-        axios.get(`https://car-rental-server-smoky.vercel.app/my-bookings/${email}`)
+
+    const getBookings = (queryStr) => {
+        axios.get(`https://car-rental-server-smoky.vercel.app/my-bookings/${email}?${queryStr}`)
             .then(res => setBookings(res.data))
     }
+
 
     const cancelBooking = () => {
         axios.put(`http://localhost:5000/update-booking/${selectedBooking?._id}`, {status: "Canceled"})
@@ -59,7 +62,7 @@ const MyBookings = () => {
                 <div className="overflow-x-auto">
                     <div className='flex flex-col md:flex-row gap-4 justify-between md:w-2/3 items-center mx-auto'>
                         <h1 className='text-center font-bold text-3xl mb-5 text-amber-500'>My Bookings</h1>
-                        <select name="sort">
+                        <select name="sort" onChange={(e) => setSort(e.target.value)}>
                             <option value="date">Sort By Date</option>
                             <option value="price">Sort By Price</option>
                         </select>
