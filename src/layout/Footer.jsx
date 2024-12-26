@@ -12,7 +12,7 @@ const Footer = () => {
                 <nav className="grid grid-flow-col gap-4">
                     <Link to="/">Home</Link>
                     {user && <Link to="/add-car">Add Car</Link>}
-                    {user && <Link to="/my-cars">My Cars</Link>}
+                    {user && <Link to={`/my-cars/${user?.email}`}>My Cars</Link>}
                     <Link to="/available-cars">AvailableCars</Link>
                 </nav>
                 <nav>

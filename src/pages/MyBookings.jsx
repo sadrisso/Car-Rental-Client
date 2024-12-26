@@ -165,21 +165,21 @@ const MyBookings = () => {
                         </dialog>
 
                         <dialog id="my_modal_2" className="modal" open={openUpdateModal}>
-                            <div className="modal-box">
+                            <div className="modal-box h-[800px]">
                                 <h3 className="font-bold text-lg text-center">Are you sure you want to modify this booking?</h3>
                                 <div className="modal-action justify-center">
                                     <div className='p-3'>
-                                        <div>
+                                        <div className='p-2 border'>
                                             <label htmlFor="">Select Start Date</label>
                                             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                                         </div>
 
-                                        <div>
+                                        <div className='p-2 border'>
                                             <label htmlFor="">Select End Date</label>
                                             <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
                                         </div>
                                     </div>
-                                    <form method="dialog">
+                                    <form method="dialog" className='flex justify-center items-center'>
                                         {/* if there is a button in form, it will close the modal */}
                                         <button className="btn mr-3" onClick={modifyBooking}>Comfirm</button>
                                         <button className="btn" onClick={() => setOpenUpdateModal(false)}>Cancel</button>

@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    const authInfo = { user, loading, createUser, signInUser, signOutUser, updateUser }
+    const authInfo = { user, loading, setLoading, createUser, signInUser, signOutUser, updateUser }
 
     return (
         <div>

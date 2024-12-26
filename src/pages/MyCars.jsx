@@ -9,17 +9,15 @@ import UpdateCar from './UpdateCar';
 
 const MyCars = () => {
 
-    const { loading } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(true);
     const [myCar, setMycar] = useState([]);
     const [selectedCar, setSelectedCar] = useState(null);
     const [sort, setSort] = useState("");
     const { email } = useParams()
-
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const closeModal = () => setIsModalOpen(false);
 
+
+    const closeModal = () => setIsModalOpen(false);
 
 
     useEffect(() => {
@@ -83,7 +81,7 @@ const MyCars = () => {
     return (
         <>
             {
-                loading || isLoading ?
+                isLoading ?
                     (<div className='h-[100vh] flex justify-center items-center'>
                         <span className="loading loading-bars loading-lg"></span>
                     </div>) : (
@@ -120,7 +118,7 @@ const MyCars = () => {
                                                 <td>${car.dailyRentalPrice}</td>
                                                 <td>{moment(car.date).format('ll')}</td>
                                                 <td>
-                                                    <Link><button onClick={() => handleModalOpen(car)} className='btn btn-xs mr-2'>Edit</button></Link>
+                                                    <button onClick={() => handleModalOpen(car)} className='btn btn-xs mr-2'>Edit</button>
                                                     <button className='btn btn-xs' onClick={() => handleRemove(car._id)}>Delete</button>
                                                 </td>
                                             </tr>)}
@@ -137,7 +135,9 @@ const MyCars = () => {
                     <div className="modal-action justify-center">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <UpdateCar selectedCar={selectedCar} closeModal={closeModal} getCars={getCars} />
+                            {
+                                selectedCar && <UpdateCar selectedCar={selectedCar} closeModal={closeModal} getCars={getCars} />
+                            }
                             <button className="mt-2 text-red-900" onClick={closeModal}><i class="fa-regular fa-circle-xmark text-2xl text-red-500 hover:text-red-300"></i></button>
                         </form>
                     </div>
