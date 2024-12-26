@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 const Login = () => {
@@ -24,6 +25,12 @@ const Login = () => {
                 console.log("Login Successfull -->", res.user)
                 form.reset()
                 toast.success("Successfully Logged In")
+
+                const user = res?.user?.email
+
+                axios.post("http://localhost:5000/jwt", user, { withCredentials: true })
+                    .then(res => console.log(res.data))
+
                 navigate(from)
             })
             .catch(err => {

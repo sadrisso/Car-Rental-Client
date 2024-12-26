@@ -56,11 +56,8 @@ const UpdateCar = ({ selectedCar, closeModal, getCars }) => {
 
 
     return (
-        <div className='text-center bg-page-bg bg-cover h-[900px] pt-36 md:h-[500px] space-y-5 md:py-20'>
-            <div>
-                <h1 className='text-3xl text-amber-500 font-semibold'>Update Car</h1>
-            </div>
-            <div className='mx-auto w-full md:w-2/3'>
+        <div className='text-center bg-page-bg bg-cover h-[900px] md:h-[500px] pt-36 space-y-5 md:py-20'>
+            <div className='w-full'>
                 <form ref={formRef} className='flex flex-col md:flex-row flex-wrap justify-center gap-5 items-center'>
                     <input
                         type="text"

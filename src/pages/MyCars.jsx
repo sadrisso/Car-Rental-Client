@@ -33,7 +33,7 @@ const MyCars = () => {
     }, [sort])
 
     const getCars = (queryStr="") => {
-        axios.get(`http://localhost:5000/my-cars/${email}?${queryStr}`)
+        axios.get(`http://localhost:5000/my-cars/${email}?${queryStr}`, {withCredentials: true})
             .then(res => setMycar(res.data))
     }
 
@@ -125,13 +125,12 @@ const MyCars = () => {
 
             <dialog id="my_modal_1" open={isModalOpen} className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
-                    <h3 className="font-bold text-lg">You want to update this data?</h3>
-                    <p className="py-4">Press ESC key or click the button below to close</p>
-                    <div className="modal-action">
+                    <h3 className="font-bold text-3xl text-center">You want to update this data?</h3>
+                    <div className="modal-action justify-center">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <UpdateCar selectedCar={selectedCar} closeModal={closeModal} getCars={getCars} />
-                            <button className="btn" onClick={closeModal}>Close</button>
+                            <button className="mt-2 text-red-900" onClick={closeModal}><i class="fa-regular fa-circle-xmark text-2xl text-red-500 hover:text-red-300"></i></button>
                         </form>
                     </div>
                 </div>
