@@ -85,7 +85,7 @@ const MyCars = () => {
                     (<div className='h-[100vh] flex justify-center items-center'>
                         <span className="loading loading-bars loading-lg"></span>
                     </div>) : (
-                        <div className='md:mt-20'>
+                        <div className='md:pt-20'>
                             <div className="overflow-x-auto">
                                 <div className='flex flex-col md:flex-row gap-4 justify-between md:w-2/3 items-center mx-auto'>
                                     <h1 className='text-center font-bold text-3xl mb-5 text-amber-500'>My Cars</h1>

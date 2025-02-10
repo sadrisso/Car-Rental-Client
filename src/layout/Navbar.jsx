@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 
 const Navbar = () => {
@@ -17,23 +17,38 @@ const Navbar = () => {
 
     const links =
         <div className='flex gap-5 items-center'>
-            <Link to="/">Home</Link>
-            {user && <Link to="/add-car">AddCar</Link>}
-            {user && <Link to={`/my-cars/${user?.email}`}>MyCars</Link>}
-            {user && <Link to={`/my-bookings/${user?.email}`}>MyBookings</Link>}
-            <Link to="/available-cars">AvailableCars</Link>
+            <NavLink className={({ isActive }) =>
+                isActive ? "text-blue-500 font-bold" : "text-white"
+            } to="/">
+                Home
+            </NavLink>
+            {user && <NavLink className={({ isActive }) =>
+                isActive ? "text-blue-500 font-bold" : "text-white"
+            } to="/add-car">AddCar</NavLink >}
+            {user && <NavLink className={({ isActive }) =>
+                isActive ? "text-blue-500 font-bold" : "text-white"
+            } to={`/my-cars/${user?.email}`}>MyCars</NavLink >}
+            {user && <NavLink className={({ isActive }) =>
+                isActive ? "text-blue-500 font-bold" : "text-white"
+            } to={`/my-bookings/${user?.email}`}>MyBookings</NavLink >}
+            <NavLink className={({ isActive }) =>
+                isActive ? "text-blue-500 font-bold" : "text-white"
+            } to="/available-cars">AvailableCars</NavLink >
             {
-                user ? <div className='flex items-center gap-2'>
-                    <button className='btn btn-sm btn-neutral' onClick={handleSignOut}>SignOut</button>
-                    <img src={user?.photoURL} alt="" className='w-[30px] h-[30px] rounded-full' />
-                </div>
-                    : <button className='btn btn-sm btn-neutral'><Link to="/login">Login</Link></button>
+                user ?
+                    <div className='flex items-center gap-2'>
+                        <button className='btn btn-sm btn-neutral' onClick={handleSignOut}>SignOut</button>
+                        <img src={user?.photoURL} alt="" className='w-[30px] h-[30px] rounded-full' />
+                    </div>
+                    : <button className='btn btn-sm btn-neutral'><NavLink className={({ isActive }) =>
+                        isActive ? "text-blue-500 font-bold" : "text-white"
+                    } to="/login">Login</NavLink></button>
             }
         </div>
 
     return (
         <div>
-            <div className="navbar bg-gray-700 md:text-white text-black">
+            <div className="navbar bg-gray-700 md:text-white text-black fixed z-10 px-2 md:px-5">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -56,10 +71,10 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <div className='flex items-center'>
-                        <img className='w-[50px] h-[50px] rounded-full' src="https://i.ibb.co.com/qCSg7zH/carLogo.webp" alt="" />
-                        <a className="btn btn-ghost text-xl text-white">Pro Cars</a>
-                    </div>
+                    <Link to="/" className='flex items-center gap-1'>
+                        <img className='w-[50px] h-[46px] rounded-full' src="/public/car-logo-vector.jpg" alt="" />
+                        <a className="text-xl font-semibold text-gray-200">Pro Cars</a>
+                    </Link>
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

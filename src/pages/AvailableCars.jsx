@@ -32,12 +32,12 @@ const AvailableCars = () => {
     }, [searchName, sort])
 
     return (
-        <div className='text-center mx-auto container space-y-10 mt-16'>
-            <div className='flex flex-col md:flex-row md:justify-between'>
-                <div>
-                    <h1 className='text-amber-500 text-4xl font-semibold'>Available Cars</h1>
+        <div className='flex flex-col gap-4 md:flex-row pt-20 py-4'>
+            <div className='flex flex-col px-2 md:px-5 bg-[#374151] py-10 rounded-md gap-2 md:py-4'>
+                <div className=''>
+                    <h1 className='text-amber-500 text-3xl font-semibold'>Available Cars</h1>
                 </div>
-                <div className='flex flex-col md:flex-row gap-4 rounded-xl '>
+                <div className='flex flex-col gap-5'>
                     <select name="sort" onChange={(e) => setSort(e.target.value)}>
                         <option value="date">Sort By Date</option>
                         <option value="price">Sort By Price</option>

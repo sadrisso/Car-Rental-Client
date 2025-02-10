@@ -13,15 +13,15 @@ const RecentListed = () => {
     }, [])
 
     return (
-        <div className=' bg-slate-400  py-10'>
+        <div className=' bg-[#010313] text-gray-200 py-10'>
             <div className='text-center'>
-                <h1 className='text-2xl md:text-4xl font-semibold text-gray-800'>Recent Listings</h1>
+                <h1 className='text-2xl md:text-4xl font-semibold text-gray-300'>Recent Listings</h1>
                 <p className='text-gray-500 mt-2'>Recently added cars, you can checkout all of this</p>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-5 gap-4 mt-10'>
+            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-5 md:px-10 gap-4 mt-10'>
                 {
                     recentAddedData.map((data, i) =>
-                        <div key={i} className="card card-compact hover:shadow-2xl">
+                        <div key={i} className="card card-compact hover:shadow-2xl bg-[#160929] p-4">
                             <figure>
                                 <img
                                     src={data?.photo}
@@ -38,7 +38,7 @@ const RecentListed = () => {
                                 <p>Added date: {moment(data?.date).format('ll')}</p>
                                 <p className='text-gray-600'>Posted {moment(data?.date).calendar()}</p>
                                 <div className="card-actions justify-end">
-                                    <Link to={`/car-details/${data._id}`}><button className="btn btn-sm">See Details</button></Link>
+                                    <Link to={`/car-details/${data._id}`}><button className="btn btn-ghost">See Details</button></Link>
                                 </div>
                             </div>
                         </div>)

@@ -11,7 +11,6 @@ const AddCar = () => {
     const { user, loading, setLoading } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    
 
     const handleSubmit = e => {
         e.preventDefault()

@@ -43,7 +43,7 @@
 
 ## Repositories
 ***client***
-https://github.com/programming-hero-web-course2/b10a11-client-side-sadrisso
+https://github.com/sadrisso/Car-Rental-Client
 ***server***
-https://github.com/programming-hero-web-course2/b10a11-server-side-sadrisso
+https://github.com/sadrisso/Car-Rental-Server
 

@@ -79,7 +79,7 @@ const CarDetails = () => {
                         <span className="loading loading-bars loading-lg"></span>
                     </div>) :
 
-                    (<div className='flex flex-col md:flex-row items-center justify-center'>
+                    (<div className='flex flex-col md:flex-row items-center justify-center pt-10'>
                         <div>
                             <img src={photo} className='w-full md:w-[600px] mx-auto' alt="" />
                         </div>
