@@ -8,6 +8,7 @@ const AvailableCars = () => {
     const [searchName, setSearchName] = useState("")
     const [view, setView] = useState("grid")
     const [sort, setSort] = useState("")
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
 
@@ -26,6 +27,7 @@ const AvailableCars = () => {
             .then(res => {
                 if (res?.data) {
                     setCars(res?.data)
+                    setLoading(false)
                 }
             })
 
@@ -64,49 +66,58 @@ const AvailableCars = () => {
 
 
             {
-                view === "grid" ? (
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                        {cars.map((car, i) =>
-                            <div key={i} className="card card-compact border text-center bg-white">
-                                <figure>
-                                    <img
-                                        src={car?.photo}
-                                        className='w-[380px] h-[200px] rounded-2xl p-2'
-                                        alt="Shoes" />
-                                </figure>
-                                <div className="card-body">
-                                    <h2 className="text-2xl" >{car.carModel}</h2>
-                                    {/* <p>Price ${car?.dailyRentalPrice}/Day</p>
-                                    <hr /> */}
-                                    <p className='text-gray-400'>{car.location}</p>
-                                    <div className="card-actions justify-center">
-                                        <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
-                                    </div>
-                                </div>
-                            </div>)}
+                loading ?
+                    <div className='text-center'>
+                        <span className="loading loading-bars loading-lg"></span>
                     </div>
-                ) : (
-                    <div className='grid grid-cols-1 gap-5'>
-                        {cars.map((car, i) =>
-                            <div key={i} className="card card-compact border text-center">
-                                <figure>
-                                    <img
-                                        src={car?.photo}
-                                        className='w-[380px] h-[200px] rounded-2xl p-2'
-                                        alt="Shoes" />
-                                </figure>
-                                <div className="card-body flex justify-between">
-                                    <div>
-                                        <h2 className="text-2xl" >{car.carModel}</h2>
-                                        <p>{car?.location}</p>
-                                    </div>
-                                    <div className="card-actions justify-end">
-                                        <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
-                                    </div>
+                    :
+                    <div>
+                        {
+                            view === "grid" ? (
+                                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
+                                    {cars.map((car, i) =>
+                                        <div key={i} className="card card-compact border text-center bg-white">
+                                            <figure>
+                                                <img
+                                                    src={car?.photo}
+                                                    className='w-[380px] h-[200px] rounded-2xl p-2'
+                                                    alt="Shoes" />
+                                            </figure>
+                                            <div className="card-body">
+                                                <h2 className="text-2xl" >{car.carModel}</h2>
+                                                {/* <p>Price ${car?.dailyRentalPrice}/Day</p>
+                                        <hr /> */}
+                                                <p className='text-gray-400'>{car.location}</p>
+                                                <div className="card-actions justify-center">
+                                                    <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
+                                                </div>
+                                            </div>
+                                        </div>)}
                                 </div>
-                            </div>)}
+                            ) : (
+                                <div className='grid grid-cols-1 gap-5'>
+                                    {cars.map((car, i) =>
+                                        <div key={i} className="card card-compact border text-center">
+                                            <figure>
+                                                <img
+                                                    src={car?.photo}
+                                                    className='w-[380px] h-[200px] rounded-2xl p-2'
+                                                    alt="Shoes" />
+                                            </figure>
+                                            <div className="card-body flex justify-between">
+                                                <div>
+                                                    <h2 className="text-2xl" >{car.carModel}</h2>
+                                                    <p>{car?.location}</p>
+                                                </div>
+                                                <div className="card-actions justify-end">
+                                                    <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
+                                                </div>
+                                            </div>
+                                        </div>)}
+                                </div>
+                            )
+                        }
                     </div>
-                )
             }
 
         </div>
