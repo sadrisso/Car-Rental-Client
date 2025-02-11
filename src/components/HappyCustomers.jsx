@@ -5,8 +5,8 @@ const HappyCustomers = () => {
 
 
     return (
-        <div>
-            <div className=''>
+        <div className='bg-[#160929]'>
+            <div className='py-10'>
                 <div className='text-center'>
                     <h1 className='text-2xl md:text-4xl font-semibold text-amber-500'>Our Happy Customers</h1>
                     <p className='text-gray-500 mt-2'>Meet our happy customers and know their opinion about us</p>

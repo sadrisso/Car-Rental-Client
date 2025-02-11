@@ -8,7 +8,7 @@ const Footer = () => {
 
     return (
         <div>
-            <footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
+            <footer className="footer footer-center bg-[#374151] text-white text-base-content rounded p-10">
                 <nav className="grid grid-flow-col gap-4">
                     <Link to="/">Home</Link>
                     {user && <Link to="/add-car">Add Car</Link>}

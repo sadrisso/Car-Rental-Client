@@ -33,7 +33,7 @@ const AvailableCars = () => {
 
     return (
         <div className='flex flex-col gap-4 md:flex-row pt-20 py-4'>
-            <div className='flex flex-col px-2 md:px-5 bg-[#374151] py-10 rounded-md gap-2 md:py-4'>
+            <div className='flex flex-col md:px-5 md:bg-[#374151] py-10 rounded-md gap-2 md:py-4 px-10'>
                 <div className=''>
                     <h1 className='text-amber-500 text-3xl font-semibold'>Available Cars</h1>
                 </div>
@@ -67,7 +67,7 @@ const AvailableCars = () => {
                 view === "grid" ? (
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
                         {cars.map((car, i) =>
-                            <div key={i} className="card card-compact border text-center">
+                            <div key={i} className="card card-compact border text-center bg-white">
                                 <figure>
                                     <img
                                         src={car?.photo}
@@ -76,10 +76,10 @@ const AvailableCars = () => {
                                 </figure>
                                 <div className="card-body">
                                     <h2 className="text-2xl" >{car.carModel}</h2>
-                                    <p>Price ${car?.dailyRentalPrice}/Day</p>
-                                    <hr />
-                                    <p>Added date: {car.date}</p>
-                                    <div className="card-actions justify-end">
+                                    {/* <p>Price ${car?.dailyRentalPrice}/Day</p>
+                                    <hr /> */}
+                                    <p className='text-gray-400'>{car.location}</p>
+                                    <div className="card-actions justify-center">
                                         <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>
                                     </div>
                                 </div>
@@ -98,8 +98,7 @@ const AvailableCars = () => {
                                 <div className="card-body flex justify-between">
                                     <div>
                                         <h2 className="text-2xl" >{car.carModel}</h2>
-                                        <p>Price ${car?.dailyRentalPrice}/Day</p>
-                                        <p>Added date: {car.date}</p>
+                                        <p>{car?.location}</p>
                                     </div>
                                     <div className="card-actions justify-end">
                                         <Link to={`/car-details/${car._id}`}><button className="btn btn-sm">See Details</button></Link>

@@ -13,7 +13,7 @@ const RecentListed = () => {
     }, [])
 
     return (
-        <div className=' bg-[#010313] text-gray-200 py-10'>
+        <div className=' bg-[#010313] text-gray-200 md:p-12 pt-10'>
             <div className='text-center'>
                 <h1 className='text-2xl md:text-4xl font-semibold text-gray-300'>Recent Listings</h1>
                 <p className='text-gray-500 mt-2'>Recently added cars, you can checkout all of this</p>
@@ -30,13 +30,7 @@ const RecentListed = () => {
                             </figure>
                             <div className="card-body">
                                 <h2 className="text-2xl font-bold" >{data.carModel}</h2>
-                                <div className='flex justify-between'>
-                                    <p>Price: ${data.dailyRentalPrice}/Day</p>
-                                    <p>Status: {data.availability}</p>
-                                </div>
-                                <hr />
-                                <p>Added date: {moment(data?.date).format('ll')}</p>
-                                <p className='text-gray-600'>Posted {moment(data?.date).calendar()}</p>
+                                <p className='text-gray-300'>{data?.location}</p>
                                 <div className="card-actions justify-end">
                                     <Link to={`/car-details/${data._id}`}><button className="btn btn-ghost">See Details</button></Link>
                                 </div>

@@ -40,8 +40,8 @@ const Login = () => {
     }
 
     return (
-        <div className='text-center container mx-auto py-10 bg-page-bg bg-cover bg-center bg-no-repeat w-full'>
-            <div>
+        <div className='text-center container mx-auto py-10 bg-page-bg bg-cover bg-center bg-no-repeat w-full pt-28 px-10'>
+            <div className=''>
                 <h1 className='md:text-4xl my-4 font-bold text-orange-400'>User Login</h1>
             </div>
             <div className="card w-full bg-base-300 max-w-sm shrink-0 mx-auto">

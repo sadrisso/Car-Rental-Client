@@ -5,7 +5,6 @@ const SpecialOffers = () => {
 
     return (
         <div>
-
             <div className=''>
                 <div className='text-center'>
                     <h1 className='text-2xl md:text-4xl font-semibold text-amber-500'>Special Offers For You</h1>

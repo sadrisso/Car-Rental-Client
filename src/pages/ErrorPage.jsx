@@ -7,8 +7,8 @@ const ErrorPage = () => {
 
 
     return (
-        <div>
-            <Link className='btn btn-link' to="/">Back to Home</Link>
+        <div className='flex justify-center items-center'>
+            <Link className='btn btn-warning text-orange-500' to="/">Back to Home</Link>
             <Lottie animationData={error} loop={true}></Lottie>
         </div>
     );

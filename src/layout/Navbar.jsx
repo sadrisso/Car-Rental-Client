@@ -73,7 +73,7 @@ const Navbar = () => {
                     </div>
                     <Link to="/" className='flex items-center gap-1'>
                         <img className='w-[50px] h-[46px] rounded-full' src="/public/car-logo-vector.jpg" alt="" />
-                        <a className="text-xl font-semibold text-gray-200">Pro Cars</a>
+                        <a className="text-lg md:text-xl font-semibold text-gray-200">Pro Cars</a>
                     </Link>
                 </div>
                 <div className="navbar-end hidden lg:flex">
