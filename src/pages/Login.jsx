@@ -2,14 +2,15 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/AuthProvider";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 import Swal from "sweetalert2";
+import useAxios from "../hooks/useAxios";
 
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
+  const axiosPublic = useAxios()
   const { signInUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -31,8 +32,8 @@ const Login = () => {
 
         const user = res?.user?.email;
 
-        axios
-          .post("https://car-rental-server-smoky.vercel.app/jwt", user, {
+        axiosPublic
+          .post("/jwt", user, {
             withCredentials: true,
           })
           .then((res) => console.log(res.data));

@@ -1,17 +1,17 @@
-import axios from 'axios';
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAxios from '../hooks/useAxios';
 
 const RecentListed = () => {
 
+    const axiosPublic = useAxios()
     const [recentAddedData, setRecentAddedData] = useState([]);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        axios.get("https://car-rental-server-smoky.vercel.app/recent-listed")
+        axiosPublic.get("/recent-listed")
             .then(res => {
-                setRecentAddedData(res.data)
+                setRecentAddedData(res?.data)
                 setLoading(false)
             })
     }, [])
@@ -30,7 +30,7 @@ const RecentListed = () => {
                     :
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-5 md:px-10 gap-4 mt-10'>
                         {
-                            recentAddedData.map((data, i) =>
+                            recentAddedData?.map((data, i) =>
                                 <div key={i} className="card card-compact hover:shadow-2xl bg-[#160929] p-4">
                                     <figure>
                                         <img

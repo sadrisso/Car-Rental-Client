@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../auth/AuthProvider";
+import React from "react";
+import useAuth from "../hooks/useAuth";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-10">

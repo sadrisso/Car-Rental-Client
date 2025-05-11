@@ -1,14 +1,15 @@
 // import React, { useContext, useState } from 'react';
-import axios from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../auth/AuthProvider';
+import useAxios from '../hooks/useAxios';
 
 const UpdateCar = ({ selectedCar, closeModal, getCars }) => {
 
     console.log("selected car", selectedCar)
 
+    const axiosPublic = useAxios()
     const formRef = useRef(null);
     const navigate = useNavigate()
     const [data, setData] = useState([])
@@ -16,7 +17,7 @@ const UpdateCar = ({ selectedCar, closeModal, getCars }) => {
     const { carModel, dailyRentalPrice, availability, registrationNumber, location, features, description } = data;
 
     useEffect(() => {
-        axios.get(`https://car-rental-server-smoky.vercel.app/update-car/${selectedCar?._id}`)
+        axiosPublic.get(`/update-car/${selectedCar?._id}`)
             .then(res => setData(res.data))
     }, [selectedCar])
 
@@ -38,7 +39,7 @@ const UpdateCar = ({ selectedCar, closeModal, getCars }) => {
                 photo: formRef.current.elements.photo.value,
             };
 
-            axios.put(`https://car-rental-server-smoky.vercel.app/update-car/${selectedCar?._id}`, formData)
+            axiosPublic.put(`/update-car/${selectedCar?._id}`, formData)
                 .then((res) => {
                     console.log("Added data --> ", res.data);
                     toast.success("Successfully Updated!");

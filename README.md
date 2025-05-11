@@ -27,7 +27,7 @@
 - React.js – Frontend library
 - Firebase/Auth0 – Authentication
 - Tailwind CSS – Styling
-- Axios – HTTP requests
+- axiosPublic – HTTP requests
 - dotenv – Environment variable management
 - jsonwebtoken (JWT) – Authentication
 
@@ -39,7 +39,7 @@
 
 ## Live Links: 
 ***Client***: https://car-rental-bffa8.web.app/
-***Server***: https://car-rental-server-smoky.vercel.app/
+***Server***: /
 
 ## Repositories
 ***client***

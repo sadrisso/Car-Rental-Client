@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthProvider';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import useAxios from '../hooks/useAxios';
 
 
 const AddCar = () => {
 
+    const axiosPublic = useAxios()
     const { user, loading, setLoading } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -24,7 +25,7 @@ const AddCar = () => {
 
         console.log("form data -->", initialData)
 
-        axios.post("https://car-rental-server-smoky.vercel.app/add-car", initialData)
+        axiosPublic.post("/add-car", initialData)
             .then(res => {
                 console.log("Added data --> ", res.data)
                 toast.success("Successfully Added!")

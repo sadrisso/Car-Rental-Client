@@ -3,12 +3,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../auth/AuthProvider';
-import axios from 'axios';
 import UpdateCar from './UpdateCar';
+import useAxios from '../hooks/useAxios';
 
 
 const MyCars = () => {
 
+    const axiosPublic = useAxios()
     const [isLoading, setIsLoading] = useState(true);
     const [myCar, setMycar] = useState([]);
     const [selectedCar, setSelectedCar] = useState(null);
@@ -32,7 +33,7 @@ const MyCars = () => {
     }, [sort])
 
     const getCars = (queryStr = "") => {
-        axios.get(`https://car-rental-server-smoky.vercel.app/my-cars/${email}?${queryStr}`)
+        axiosPublic.get(`/my-cars/${email}?${queryStr}`)
             .then(res => {
                 setMycar(res.data)
                 setIsLoading(false)
@@ -55,7 +56,7 @@ const MyCars = () => {
                 return;
             }
             if (res.isConfirmed) {
-                fetch(`https://car-rental-server-smoky.vercel.app/my-cars/${id}`, {
+                fetch(`/my-cars/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

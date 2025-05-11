@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,10 +5,12 @@ import { AuthContext } from '../auth/AuthProvider';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+import useAxios from '../hooks/useAxios';
 
 
 const CarDetails = () => {
 
+    const axiosPublic = useAxios();
     const { user } = useContext(AuthContext)
     const [isCarBooked, setIsCarBooked] = useState(false)
     const [bookingCarData, setBookingCarData] = useState(null)
@@ -21,7 +22,7 @@ const CarDetails = () => {
 
 
     const checkBookStatus = () => {
-        axios.get(`https://car-rental-server-smoky.vercel.app/is-car-booked/${user?.email}/${carModel}`)
+        axiosPublicPublic.get(`/is-car-booked/${user?.email}/${carModel}`)
             .then(res => {
                 console.log(res?.data)
                 setIsLoading(false)
@@ -43,7 +44,7 @@ const CarDetails = () => {
 
     const handleBooking = () => {
         if (bookingCarData) {
-            axios.put(`https://car-rental-server-smoky.vercel.app/update-booking/${bookingCarData?._id}`, { status: "Booked" })
+            axiosPublic.put(`/update-booking/${bookingCarData?._id}`, { status: "Booked" })
                 .then((res) => {
                     toast.success("Booking Confirmed")
                     setIsLoading(true)
@@ -61,7 +62,7 @@ const CarDetails = () => {
                 fromDate: moment(startDate).format(),
                 toDate: moment(endDate).format(),
             }
-            axios.post("https://car-rental-server-smoky.vercel.app/my-bookings", payLoad)
+            axiosPublic.post("/my-bookings", payLoad)
                 .then(res => {
                     toast.success("Booking Confirmed")
                     setIsLoading(true)

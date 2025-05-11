@@ -1,8 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import useAxios from "../hooks/useAxios";
 
 const AvailableCars = () => {
+  const axiosPublic = useAxios()
   const [cars, setCars] = useState(useLoaderData());
   const [searchName, setSearchName] = useState("");
   const [view, setView] = useState("grid");
@@ -21,8 +22,8 @@ const AvailableCars = () => {
 
     console.log(sort);
 
-    axios
-      .get(`https://car-rental-server-smoky.vercel.app/all-cars?${queryStr}`)
+    axiosPublic
+      .get(`/all-cars?${queryStr}`)
       .then((res) => {
         if (res?.data) {
           setCars(res?.data);

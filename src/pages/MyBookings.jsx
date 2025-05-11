@@ -1,13 +1,14 @@
-import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import useAxios from '../hooks/useAxios';
 
 const MyBookings = () => {
 
+    const axiosPublic = useAxios()
     const { email } = useParams();
     const [bookings, setBookings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +54,7 @@ const MyBookings = () => {
 
 
     const getBookings = (queryStr) => {
-        axios.get(`https://car-rental-server-smoky.vercel.app/my-bookings/${email}?${queryStr}`)
+        axiosPublic.get(`/my-bookings/${email}?${queryStr}`)
             .then(res => {
                 setBookings(res.data)
                 setIsLoading(false)
@@ -62,7 +63,7 @@ const MyBookings = () => {
 
 
     const cancelBooking = () => {
-        axios.put(`https://car-rental-server-smoky.vercel.app/update-booking/${selectedBooking?._id}`, { status: "Canceled" })
+        axiosPublic.put(`/update-booking/${selectedBooking?._id}`, { status: "Canceled" })
             .then((res) => {
                 console.log("Added data --> ", res.data);
                 toast.success("Successfully Canceled!");
@@ -82,7 +83,7 @@ const MyBookings = () => {
             toDate: moment(endDate).format()
         }
 
-        axios.put(`https://car-rental-server-smoky.vercel.app/update-booking/${selectedBooking?._id}`, payLoad)
+        axiosPublic.put(`/update-booking/${selectedBooking?._id}`, payLoad)
             .then((res) => {
                 toast.success("Successfully Modified!");
                 setOpenUpdateModal(false)
