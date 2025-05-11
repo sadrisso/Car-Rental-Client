@@ -38,7 +38,7 @@ const Navbar = () => {
                 user ?
                     <div className='flex items-center gap-2'>
                         <button className='btn btn-sm btn-neutral' onClick={handleSignOut}>SignOut</button>
-                        <img src={user?.photoURL} alt="" className='w-[30px] h-[30px] rounded-full' />
+                        <Link to="/profile"><img src={user?.photoURL} alt="" className='w-[30px] h-[30px] rounded-full' /></Link>
                     </div>
                     : <button className='btn btn-sm btn-neutral'><NavLink className={({ isActive }) =>
                         isActive ? "text-blue-500 font-bold" : "text-white"

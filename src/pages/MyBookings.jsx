@@ -101,7 +101,7 @@ const MyBookings = () => {
                     (<div className='h-[100vh] flex justify-center items-center'>
                         <span className="loading loading-bars loading-lg"></span>
                     </div>) :
-                    <div>
+                    <div className='pb-6'>
                         <div className='md:pt-28'>
                             <div className="overflow-x-auto">
                                 <div className='flex flex-col md:flex-row gap-4 justify-between md:w-2/3 items-center mx-auto'>
