@@ -92,7 +92,7 @@ const AvailableCars = () => {
               {cars.map((car, i) => (
                 <div
                   key={i}
-                  className="card card-compact border text-center bg-white"
+                  className="card card-compact border text-center bg-white transition-all"
                 >
                   <figure>
                     <img
@@ -120,7 +120,7 @@ const AvailableCars = () => {
               {cars.map((car, i) => (
                 <div
                   key={i}
-                  className="flex border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all bg-white w-full"
+                  className="flex border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all bg-white"
                 >
                   <img
                     src={car?.photo}

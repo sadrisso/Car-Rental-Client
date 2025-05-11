@@ -42,7 +42,7 @@ const RecentListed = () => {
                                         <h2 className="text-2xl font-bold" >{data.carModel}</h2>
                                         <p className='text-gray-300'>{data?.location}</p>
                                         <div className="card-actions justify-end">
-                                            <Link to={`/car-details/${data._id}`}><button className="btn btn-ghost">See Details</button></Link>
+                                            <Link to={`/car-details/${data._id}`}><button className="btn btn-outline">See Details</button></Link>
                                         </div>
                                     </div>
                                 </div>)
