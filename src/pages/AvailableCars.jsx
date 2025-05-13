@@ -4,7 +4,7 @@ import useAxios from "../hooks/useAxios";
 
 const AvailableCars = () => {
   const axiosPublic = useAxios()
-  const [cars, setCars] = useState(useLoaderData());
+  const [cars, setCars] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [view, setView] = useState("grid");
   const [sort, setSort] = useState("");

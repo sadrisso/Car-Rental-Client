@@ -4,9 +4,11 @@ import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import UpdateCar from "./UpdateCar";
 import useAxios from "../hooks/useAxios";
+import useAuth from "../hooks/useAuth";
 
 const MyCars = () => {
   const axiosPublic = useAxios();
+  const {user} = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [myCar, setMycar] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
@@ -15,6 +17,15 @@ const MyCars = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => setIsModalOpen(false);
+
+  const fetchCars = async () => {
+    const res = await axiosPublic.get(`my-cars/${user?.email}`)
+    setMycar(res?.data)
+  }
+
+  useEffect(() => {
+    fetchCars()
+  }, [])
 
   useEffect(() => {
     let queryStr = "";
@@ -50,15 +61,9 @@ const MyCars = () => {
         return;
       }
       if (res.isConfirmed) {
-        fetch(`/my-cars/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-        const remaining = myCar.filter((car) => car._id !== id);
-        setMycar(remaining);
+        axiosPublic
+          .delete(`/my-cars/${id}`)
+          .then((res) => fetchCars());
       }
       Swal.fire({
         title: "Deleted!",
@@ -129,7 +134,7 @@ const MyCars = () => {
                       </button>
                       <button
                         className="btn btn-xs"
-                        onClick={() => handleRemove(car._id)}
+                        onClick={() => handleRemove(car?._id)}
                       >
                         Delete
                       </button>

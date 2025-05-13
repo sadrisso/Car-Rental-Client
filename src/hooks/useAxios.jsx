@@ -2,7 +2,7 @@ import axios from "axios";
 
 const useAxios = () => {
   const axiosPublic = axios.create({
-    baseURL: "https://car-rental-bffa8.web.app",
+    baseURL: "https://car-rental-server-smoky.vercel.app",
   });
   return axiosPublic;
 };
