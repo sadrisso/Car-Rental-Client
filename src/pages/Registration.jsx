@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../auth/AuthProvider";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
 
 const googleProvider = new GoogleAuthProvider();
 
 const Registration = () => {
-  const { createUser, loading, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useAuth();
   const [error, setError] = useState({});
   const navigate = useNavigate();
 

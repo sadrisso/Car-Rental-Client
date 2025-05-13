@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
+import useAuth from '../hooks/useAuth';
 
 const Footer = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth()
 
     return (
         <div>
-            <footer className="footer footer-center bg-[#374151] text-white text-base-content rounded p-10">
+            <footer className="footer footer-center bg-[#374151] text-white rounded p-10">
                 <nav className="grid grid-flow-col gap-4">
                     <Link to="/">Home</Link>
                     {user && <Link to="/add-car">Add Car</Link>}

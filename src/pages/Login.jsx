@@ -6,12 +6,13 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 import Swal from "sweetalert2";
 import useAxios from "../hooks/useAxios";
+import useAuth from "../hooks/useAuth";
 
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
-  const axiosPublic = useAxios()
-  const { signInUser } = useContext(AuthContext);
+  const axiosPublic = useAxios();
+  const { signInUser } = useAuth();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,7 +51,7 @@ const Login = () => {
     signInWithPopup(auth, googleProvider)
       .then((res) => {
         Swal.fire({
-          title:  `Welcome ${res?.user?.displayName}`,
+          title: `Welcome ${res?.user?.displayName}`,
           icon: "success",
           draggable: true,
         });

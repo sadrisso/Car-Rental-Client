@@ -1,10 +1,8 @@
-import React from 'react';
 import error from '../../public/errorLottieAnimation.json'
 import Lottie from 'lottie-react';
 import { Link } from 'react-router-dom';
 
 const ErrorPage = () => {
-
 
     return (
         <div className='flex justify-center items-center'>
