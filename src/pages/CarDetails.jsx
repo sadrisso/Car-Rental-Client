@@ -26,6 +26,8 @@ const CarDetails = () => {
     bookingCount,
   } = carDetails;
 
+  console.log("Car Details : ", carDetails)
+
   const checkBookStatus = () => {
     axiosPublic.get(`/is-car-booked/${user?.email}/${carModel}`).then((res) => {
       console.log(res?.data);
@@ -59,7 +61,7 @@ const CarDetails = () => {
         });
     } else {
       const payLoad = {
-        carModel: carModel.trim(),
+        carModel: carModel?.trim(),
         availability,
         date,
         dailyRentalPrice,

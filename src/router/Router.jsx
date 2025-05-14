@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `/car-details/${params.id}`
+            `https://car-rental-server-smoky.vercel.app/car-details/${params.id}`
           ),
       },
       {
